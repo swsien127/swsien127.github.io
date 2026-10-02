@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sang-Wha Sien</title>
+<meta name="description" content="Sang-Wha Sien — HCI and communication researcher at Nanyang Technological University, Singapore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F8F9FB;
+    --sidebar: #F1F2F4;
+    --surface: #FFFFFF;
+    --ink: #1F2023;
+    --muted: #8A8F98;
+    --rule: #DDE3EB;
+    --accent: #1F2023;
+    --ring: #DCE2F2;
+    --todo-bg: #FFF4C2;
+    --todo-ink: #6B5300;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: var(--muted); }
+  a:hover { text-decoration-color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+
+  .sidebar {
+    background: var(--sidebar);
+    border-right: 1px solid var(--rule);
+    padding: 40px 32px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .photo {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: var(--rule);
+    border: 4px solid var(--ring);
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin: 28px 0 6px;
+  }
+  .role { color: var(--muted); font-size: 0.95rem; margin: 0 0 18px; }
+  .contact { font-size: 0.9rem; margin: 0 0 22px; }
+  .contact p { margin: 0 0 4px; }
+
+  .links { display: flex; gap: 10px; list-style: none; padding: 0; margin: 0 0 28px; }
+  .links a {
+    display: grid; place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid transparent;
+    color: var(--ink);
+    font-weight: 700; font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .links a:hover { border-color: var(--rule); }
+
+  nav { border-top: 1px solid var(--rule); padding-top: 20px; }
+  nav ul { list-style: none; padding: 0; margin: 0; }
+  nav a {
+    display: block;
+    padding: 6px 0 6px 12px;
+    border-left: 2px solid transparent;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav a:hover { color: var(--ink); }
+  nav a.active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
+
+  main { padding: 56px 64px 80px; max-width: 920px; }
+
+  section { margin-bottom: 64px; scroll-margin-top: 24px; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 20px;
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(31, 32, 35, 0.06);
+    padding: 32px 36px;
+  }
+  .panel p { margin: 0 0 1em; max-width: 70ch; }
+  .panel p:last-child { margin-bottom: 0; }
+
+  /* Research projects */
+  .project { padding: 22px 0; border-top: 1px solid var(--rule); }
+  .project:first-child { border-top: 0; padding-top: 0; }
+  .project:last-child { padding-bottom: 0; }
+  .project h3 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; margin: 0 0 6px; }
+
+  /* Publications */
+  .pub-year { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; margin: 28px 0 10px; color: var(--muted); }
+  .pub-year:first-child { margin-top: 0; }
+  .pubs { list-style: none; padding: 0; margin: 0; }
+  .pubs li { margin-bottom: 18px; max-width: 72ch; }
+  .pubs li:last-child { margin-bottom: 0; }
+  .pub-title { font-weight: 600; display: block; }
+  .pub-authors, .pub-venue { display: block; color: var(--muted); font-size: 0.95rem; }
+  .pub-authors strong { color: var(--ink); font-weight: 600; }
+  .pub-links { font-size: 0.9rem; }
+  .pub-links a { margin-right: 12px; }
+  .award { color: var(--ink); font-weight: 500; font-size: 0.9rem; }
+
+  .plain-list { padding-left: 1.2em; margin: 0; }
+  .plain-list li { margin-bottom: 8px; }
+
+  /* Placeholders — search the file for "TODO" and delete this class once filled in */
+  .todo { background: var(--todo-bg); color: var(--todo-ink); padding: 1px 4px; border-radius: 3px; }
+
+  footer { color: var(--muted); font-size: 0.85rem; }
+
+  /* Mobile */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); padding: 32px 24px; text-align: center; }
+    .photo { width: 150px; height: 150px; margin: 0 auto; }
+    .links { justify-content: center; }
+    nav { display: none; }
+    main { padding: 40px 20px 64px; }
+    .panel { padding: 24px 20px; }
+    h2 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <!-- TODO: add your photo to the repo at images/profile.jpg -->
+    <img class="photo" src="images/profile.jpg" alt="Portrait of Sang-Wha Sien">
+
+    <h1 class="name">Sang-Wha Sien</h1>
+    <p class="role">Postdoctoral Researcher<br>Nanyang Technological University</p>
+
+    <div class="contact">
+      <p>sangwhasien [at] gmail [dot] com</p>
+      <p><span class="todo">TODO: NTU email</span></p>
+    </div>
+
+    <ul class="links">
+      <li><a href="cv.pdf" title="CV" aria-label="CV">CV</a></li>
+      <li><a href="#" title="Google Scholar" aria-label="Google Scholar"><!-- TODO: Scholar URL -->GS</a></li>
+      <li><a href="#" title="LinkedIn" aria-label="LinkedIn"><!-- TODO: LinkedIn URL -->in</a></li>
+    </ul>
+
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#teaching">Teaching &amp; service</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+
+    <section id="about">
+      <h2>About me</h2>
+      <div class="panel">
+        <p>
+          I'm a postdoctoral researcher at the
+          <a href="https://www.ntu.edu.sg/wkwsci">Wee Kim Wee School of Communication and Information</a>,
+          <a href="https://www.ntu.edu.sg">Nanyang Technological University</a>, Singapore, working with
+          <span class="todo">TODO: supervisor name + link</span>.
+          I received my Ph.D. in Computer Science from the
+          <a href="https://www.cs.ubc.ca">University of British Columbia</a>, where I was advised by
+          <a href="https://www.cs.ubc.ca/~joanna/">Prof. Joanna McGrenere</a> in the eDAPT Lab.
+          <span class="todo">TODO: year of PhD, earlier degrees if you want them here</span>
+        </p>
+        <p><span class="todo">TODO: one line on what you're open to — collaborations, students, job market, etc.</span></p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="panel">
+        <p>
+          <span class="todo">TODO: opening sentence on the big-picture problem you care about.</span>
+        </p>
+        <p>
+          My research sits at the intersection of <strong>human-computer interaction</strong> and
+          <strong>communication</strong>, with a focus on <strong>AI-mediated interpersonal and therapeutic contexts</strong>.
+          I study how AI shapes engagement, communication, and well-being, particularly in
+          <strong>mental health</strong>, and how design can respond to the needs of
+          <strong>culturally and socially diverse</strong> people.
+          I draw on qualitative and mixed methods to develop and evaluate systems that are empirically grounded and contextually sensitive.
+          <span class="todo">TODO: tighten / reword in your own voice</span>
+        </p>
+        <p><span class="todo">TODO (optional): a personal line, like Fumeng's "outside of my work…"</span></p>
+      </div>
+
+      <div class="panel" style="margin-top: 20px;">
+        <!-- Duplicate a .project block per project -->
+        <div class="project">
+          <h3><span class="todo">TODO: Project title</span></h3>
+          <p><span class="todo">TODO: 2–3 sentences: question, approach, what you found or built.</span></p>
+        </div>
+        <div class="project">
+          <h3><span class="todo">TODO: Project title</span></h3>
+          <p><span class="todo">TODO: 2–3 sentences.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="panel">
+        <!-- Copy one <li> per paper; group by year -->
+        <p class="pub-year">2026</p>
+        <ul class="pubs">
+          <li>
+            <span class="pub-title"><span class="todo">TODO: Paper title</span></span>
+            <span class="pub-authors"><strong>Sang-Wha Sien</strong>, Co-author A, Co-author B</span>
+            <span class="pub-venue"><span class="todo">TODO: Venue (e.g., CHI '26)</span></span>
+            <span class="pub-links"><a href="#">PDF</a><a href="#">DOI</a></span>
+          </li>
+        </ul>
+
+        <p class="pub-year">2025</p>
+        <ul class="pubs">
+          <li>
+            <span class="pub-title"><span class="todo">TODO: Paper title</span></span>
+            <span class="pub-authors">Co-author A, <strong>Sang-Wha Sien</strong>, Co-author B</span>
+            <span class="pub-venue"><span class="todo">TODO: Venue</span> <span class="award">Best Paper Honorable Mention</span></span>
+            <span class="pub-links"><a href="#">PDF</a><a href="#">DOI</a></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching &amp; service</h2>
+      <div class="panel">
+        <ul class="plain-list">
+          <li><span class="todo">TODO: Course / TA role, institution, term</span></li>
+          <li><span class="todo">TODO: Reviewing (e.g., CHI, CSCW), organizing, mentoring</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Last updated <span class="todo">TODO: month year</span></footer>
+  </main>
+</div>
+
+<script>
+  // Highlight the current section in the sidebar
+  const links = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('main section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
